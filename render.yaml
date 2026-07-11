@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: aicomply-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aicomply-db
+          property: connectionString
+      - key: SECRET_KEY
+        value: 119d6690c14481f044cd71777b224483be694ebce30b6d3ecf02a3ecc3d4af07
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_ORIGINS
+        value: '["*"]'
+      - key: PYTHON_VERSION
+        value: 3.12.0
+
+databases:
+  - name: aicomply-db
+    databaseName: aicomply
+    user: aicomply
+    plan: free
