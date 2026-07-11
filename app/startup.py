@@ -13,6 +13,7 @@ import app.db.models.user       # noqa
 import app.db.models.framework  # noqa
 import app.db.models.document   # noqa
 import app.db.models.task       # noqa
+import app.db.models.igaming    # noqa
 
 logger = logging.getLogger(__name__)
 
