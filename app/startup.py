@@ -19,11 +19,15 @@ logger = logging.getLogger(__name__)
 
 
 async def create_tables():
-    engine = create_async_engine(settings.DATABASE_URL)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    await engine.dispose()
-    logger.info('Database tables created / verified')
+    try:
+        engine = create_async_engine(settings.DATABASE_URL)
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        await engine.dispose()
+        logger.info('Database tables created / verified')
+    except Exception as exc:
+        logger.error('Database startup check failed: %s', exc)
+        # Non-fatal: app continues; DB errors will surface per-request
 
 
 if __name__ == '__main__':
