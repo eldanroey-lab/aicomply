@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.core.config import settings
@@ -41,3 +42,8 @@ app.include_router(api_router)
 @app.get('/health', tags=['Health'])
 async def health():
     return {'status': 'ok', 'version': settings.APP_VERSION}
+
+
+@app.get('/', include_in_schema=False)
+async def serve_ui():
+    return FileResponse('aicomply-ui.html')
