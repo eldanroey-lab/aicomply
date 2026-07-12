@@ -157,8 +157,8 @@ async def scan_players(
 @router.post("/scan-csv", response_model=ScanResponse, status_code=status.HTTP_201_CREATED)
 async def scan_players_csv(
     file: UploadFile = File(...),
-    db: DB = Depends(get_db),
-    current_user: CurrentUser = Depends(get_current_user),
+    db: DB,
+    current_user: CurrentUser,
 ):
     """
     Upload a CSV file to scan multiple players at once.
