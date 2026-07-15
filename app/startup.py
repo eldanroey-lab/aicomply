@@ -15,6 +15,8 @@ import app.db.models.document   # noqa
 import app.db.models.task       # noqa
 import app.db.models.igaming    # noqa
 import app.db.models.euai       # noqa
+import app.db.models.soc2       # noqa
+import app.db.models.gdpr       # noqa
 
 logger = logging.getLogger(__name__)
 
